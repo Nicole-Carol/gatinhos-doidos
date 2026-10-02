@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projeto Guuilherme</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("gato1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            color: rgb(177, 9, 9);
+            text-align: center;
+            font-size: 50px;
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: white;
+        }
+
+        .gatos {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .gato {
+            background-color: white;
+            width: 300px;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .gato:hover {
+            transform: scale(1.05);
+        }
+
+        .gato img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .gato h2 {
+            color: rgb(177, 9, 9);
+            font-size: 28px;
+        }
+
+        .gato p {
+            color: #333;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: rgb(177, 9, 9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: rgb(120, 5, 5);
+        }
+
+        #mensagem {
+            display: none;
+        }
+
+        #mensagem.mostrar {
+            display: block;
+            background-color: white;
+            color: rgb(177, 9, 9);
+            width: 500px;
+            max-width: 90%;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #mensagemTama {
+            display: none;
+        }
+
+        #mensagemTama.mostrar {
+            display: block;
+            background-color: white;
+            color: rgb(177, 9, 9);
+            width: 500px;
+            max-width: 90%;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #pagina-gato {
+            display: none;
+
+            background-color: white;
+            color: #333;
+
+            width: 90%;
+            max-width: 900px;
+
+            margin: 50px auto;
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        #pagina-gato.mostrar {
+            display: block;
+        }
+
+        #pagina-gato h2 {
+            color: rgb(177, 9, 9);
+            font-size: 35px;
+            text-align: center;
+        }
+
+        #pagina-gato p {
+            color: #333;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        #pagina-gato li {
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        #pagina-gato img {
+            display: block;
+            width: 300px;
+            max-width: 100%;
+            height: 250px;
+            object-fit: cover;
+            margin: 0 auto 25px;
+            border-radius: 15px;
+        }
+
+        .fechar {
+            background-color: rgb(22, 21, 21);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        .fechar:hover {
+            background-color: rgb(120, 5, 5);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>🐱 Gatinhos doidos 🐱</h1>
+
+    <div class="gatos">
+
+        <div class="gato">
+
+            <img src="imagens/Stubbs.jpg" alt="Stubbs">
+
+            <h2>Stubbs</h2>
+
+            <p>
+                O gato prefeito que conquistou uma cidade inteira.
+            </p>
+
+            <button id="botao-stubbs">
+                Conhecer Stubbs
+            </button>
+
+        </div>
+
+        <div class="gato">
+
+            <img src="imagens/tama.jpeg" alt="Tama">
+
+            <h2>Tama</h2>
+
+            <p>
+                A famosa gata chefe de estação do Japão.
+            </p>
+
+            <button id="botao-tama">
+                Conhecer Tama
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="mensagem"></div>
+
+    <div id="mensagemTama"></div>
+
+    <section id="pagina-gato"></section>
+
+
+    <script>
+
+        const botaoStubbs = document.getElementById("botao-stubbs");
+        const botaoTama = document.getElementById("botao-tama");
+
+        const mensagemStubbs = document.getElementById("mensagem");
+        const mensagemTama = document.getElementById("mensagemTama");
+
+        const paginaGato = document.getElementById("pagina-gato");
+
+
+        botaoStubbs.addEventListener("click", function () {
+
+
+            mensagemTama.classList.remove("mostrar");
+
+
+            mensagemStubbs.textContent =
+                "Stubbs não está disponível. Ele está ocupado sendo o gato mais importante da cidade. 🐱👑";
+
+            mensagemStubbs.classList.add("mostrar");
+
+
+            setTimeout(function () {
+
+                mensagemStubbs.classList.remove("mostrar");
+
+                paginaGato.innerHTML = `
+
+                    <img src="imagens/Stubbs.jpg" alt="Stubbs">
+
+                    <h2>🐱 Sobre Stubbs</h2>
+
+                    <p>
+                        Stubbs foi um famoso gato que ficou conhecido
+                        por ocupar o cargo simbólico de prefeito da pequena
+                        cidade de Talkeetna, no Alasca.
+                    </p>
+
+                    <p>
+                        Ele se tornou uma atração turística e conquistou
+                        muitas pessoas com sua personalidade.
+                    </p>
+
+                    <h3>🐾 Algumas curiosidades</h3>
+
+                    <ul>
+
+                        <li>
+                            Stubbs ficou famoso por ser conhecido como
+                            o "prefeito gato" de Talkeetna.
+                        </li>
+
+                        <li>
+                            Ele viveu por muitos anos e se tornou
+                            uma personalidade bastante conhecida.
+                        </li>
+
+                        <li>
+                            Turistas visitavam a cidade para conhecer
+                            o famoso gato.
+                        </li>
+
+                        <li>
+                            Stubbs ganhou fama principalmente pela
+                            internet e pela mídia.
+                        </li>
+
+                    </ul>
+
+                    <button class="fechar" onclick="fecharPagina()">
+                        Voltar para os gatos
+                    </button>
+
+                `;
+
+
+                paginaGato.classList.add("mostrar");
+
+                paginaGato.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }, 2000);
+
+        });
+
+
+        botaoTama.addEventListener("click", function () {
+
+
+            mensagemStubbs.classList.remove("mostrar");
+
+
+            mensagemTama.textContent =
+                "Tama está esperando você conhecer a história dela. 🐱🚂";
+
+            mensagemTama.classList.add("mostrar");
+
+
+            setTimeout(function () {
+
+                mensagemTama.classList.remove("mostrar");
+
+                paginaGato.innerHTML = `
+
+                    <img src="imagens/tama.jpeg" alt="Tama">
+
+                    <h2>🐱 Sobre Tama</h2>
+
+                    <p>
+                        Tama foi uma famosa gata japonesa que ficou
+                        conhecida por trabalhar como chefe de estação
+                        na estação de Kishi, no Japão.
+                    </p>
+
+                    <p>
+                        Ela acabou se tornando uma verdadeira celebridade
+                        e ajudou a chamar a atenção das pessoas para
+                        a estação ferroviária.
+                    </p>
+
+                    <h3>🚂 Algumas curiosidades</h3>
+
+                    <ul>
+
+                        <li>
+                            Tama ficou conhecida como a gata chefe
+                            de estação.
+                        </li>
+
+                        <li>
+                            Ela usava um pequeno uniforme e um chapéu
+                            especialmente feito para ela.
+                        </li>
+
+                        <li>
+                            Sua presença ajudou a aumentar o interesse
+                            dos turistas pela estação.
+                        </li>
+
+                        <li>
+                            Tama se tornou uma das gatas mais famosas
+                            do Japão.
+                        </li>
+
+                    </ul>
+
+                    <button class="fechar" onclick="fecharPagina()">
+                        Voltar para os gatos
+                    </button>
+
+                `;
+
+
+                paginaGato.classList.add("mostrar");
+
+
+                paginaGato.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }, 2000);
+
+        });
+
+
+    
+
+        function fecharPagina() {
+
+            paginaGato.classList.remove("mostrar");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
